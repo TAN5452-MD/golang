@@ -2,24 +2,34 @@ package main
 
 import (
 	"fmt"
-	"regexp"
-	"strconv"
+	"sort"
+	"strings"
 )
 
-type T struct {
-	a int
-	b float32
-	c string
-}
-
 func main() {
-	t := &T{7, -2.35, "abc\tdef"}
-	fmt.Println(t)
+	var str []string = []string{"eat", "tea", "tan", "ate", "nat", "bat"}
+	groupAnagrams(str)
 }
+func groupAnagrams(strs []string) [][]string {
+	ans := make(map[string][]string)
 
-func (t *T) String() string {
-	var pat = "\t"
-	re := regexp.MustCompile(pat)
-	str := re.ReplaceAllString(t.c, "\\t")
-	return "" + strconv.Itoa(t.a) + "/" + strconv.FormatFloat(float64(t.b), 'g', -1, 32) + "/" + str + ""
+	for _, v := range strs {
+		str := v
+		split := strings.Split(str, "")
+		sort.Strings(split)
+		r := strings.Join(split, "")
+		_, isP := ans[r]
+		if !isP {
+			ans[r] = []string{}
+		}
+		ans[r] = append(ans[r], v)
+
+	}
+	var lst = [][]string{}
+	for _, v := range ans {
+		fmt.Println(v)
+		lst = append(lst, v)
+	}
+	return lst
+
 }

@@ -1,11 +1,20 @@
-var findMedianSortedArrays = function(nums1, nums2) {
-    const s = [...nums1,...nums2].sort()
-    console.log(s);
-    return  (s.length & 1) === 0 ? 
-     (s[s.length/2]+s[(s.length/2)-1])/2   : s[Math.floor(s.length/2)]
+/**
+ * @param {string[]} strs
+ * @return {string[][]}
+ */
+    var groupAnagrams = function(strs) {
+        let result = {};
+        for (let i = 0; i < strs.length; i++) {
+            let str = strs[i];
+            let sortedStr = str.split('').sort().join('');
+            if (!result[sortedStr]) {
+                result[sortedStr] = [];
+            }
+            result[sortedStr].push(str);
+        }
+        console.log(result);
+        return Object.values(result);
+    };
 
-};
-
-const r = findMedianSortedArrays([1,3],[2])
-
-console.log(r)
+console.log(groupAnagrams(["eat", "tea", "tan", "ate", "nat", "bat"]
+));
