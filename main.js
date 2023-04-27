@@ -1,20 +1,7 @@
-/**
- * @param {string[]} strs
- * @return {string[][]}
- */
-    var groupAnagrams = function(strs) {
-        let result = {};
-        for (let i = 0; i < strs.length; i++) {
-            let str = strs[i];
-            let sortedStr = str.split('').sort().join('');
-            if (!result[sortedStr]) {
-                result[sortedStr] = [];
-            }
-            result[sortedStr].push(str);
-        }
-        console.log(result);
-        return Object.values(result);
-    };
-
-console.log(groupAnagrams(["eat", "tea", "tan", "ate", "nat", "bat"]
-));
+var plusOne = function(digits) {
+    let res = digits.join("")
+    ans = BigInt(res) + 1n
+    return String(ans).split("")
+ 
+ }
+console.log( plusOne([6,1,4,5,3,9,0,1,9,5,1,8,6,7,0,5,5,4,3]));

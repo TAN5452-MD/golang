@@ -1,35 +1,27 @@
 package main
 
-import (
-	"fmt"
-	"sort"
-	"strings"
-)
+type Simpler interface {
+	Get() int
+	Set(int)
+}
+type Simple struct {
+	num int
+}
+
+func (s Simple) Get() int {
+	return s.num
+}
+
+// 如果不使用引用的话只是值传递并不能真正修改到值
+func (s *Simple) Set(num int) {
+	s.num = num
+}
 
 func main() {
-	var str []string = []string{"eat", "tea", "tan", "ate", "nat", "bat"}
-	groupAnagrams(str)
-}
-func groupAnagrams(strs []string) [][]string {
-	ans := make(map[string][]string)
-
-	for _, v := range strs {
-		str := v
-		split := strings.Split(str, "")
-		sort.Strings(split)
-		r := strings.Join(split, "")
-		_, isP := ans[r]
-		if !isP {
-			ans[r] = []string{}
-		}
-		ans[r] = append(ans[r], v)
-
+	var a = new(Simple)
+	a.num = 1
+	var b Simpler
+	if _, ok := b.(a); ok {
+		return
 	}
-	var lst = [][]string{}
-	for _, v := range ans {
-		fmt.Println(v)
-		lst = append(lst, v)
-	}
-	return lst
-
 }
